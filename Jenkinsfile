@@ -26,8 +26,6 @@ pipeline {
     }
     post {
         success {
-            sh 'ls -al'
-            sh 'pwd'
             notifyBuild("success")
         }
 

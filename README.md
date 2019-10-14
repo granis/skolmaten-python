@@ -1,5 +1,7 @@
 # skolmaten-python
 
+[![Build Status](https://jenkins.lovskog.net/buildStatus/icon?job=skolmaten-python%2Fmaster&style=flat-square)](https://jenkins.lovskog.net/job/skolmaten-python/job/master/)
+
 This is a simple wrapper for the [skolmaten.se](https://skolmaten.se) service.
 
 I wrote this becuase I needed a way to get the data for what I am going to eat in school for some stuff. So, why not publish it and help somebody else.
