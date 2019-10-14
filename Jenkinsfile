@@ -9,7 +9,7 @@ pipeline {
             }
             steps {
                 sh 'python setup.py sdist bdist_wheel'
-                archiveArtifacts artifacts: 'dist/*.whl'
+                archiveArtifacts artifacts: 'dist/*.whl', fingerprint: true
             }
         }
         stage('Build-py3') {
@@ -20,7 +20,7 @@ pipeline {
             }
             steps {
                 sh 'python setup.py sdist bdist_wheel'
-                archiveArtifacts artifacts: 'dist/*.whl'
+                archiveArtifacts artifacts: 'dist/*.whl', fingerprint: true
             }
         }
     }
