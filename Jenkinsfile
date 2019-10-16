@@ -1,6 +1,6 @@
 pipeline {
     agent { node { label 'master' } }
-    enviorment {
+    environment {
       pypiCreds = credentials('pypi-simoncircle')
     }
     stages {
