@@ -29,7 +29,7 @@ pipeline {
                 sh 'python setup.py sdist bdist_wheel'
 
                 sh 'pip install twine'
-                sh 'twine upload -u $pypiCreds_USR -p $pypiCreds_PSW dist/*'
+                sh 'twine upload -u $pypiCreds_USR -p $pypiCreds_PSW dist/*.whl'
 
                 archiveArtifacts artifacts: 'dist/*.whl', fingerprint: true
             }
