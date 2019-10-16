@@ -1,5 +1,8 @@
 pipeline {
     agent { node { label 'master' } }
+    enviorment {
+      pypiCreds = credentials('pypi-simoncircle')
+    }
     stages {
         stage('Build-py2') {
             agent {
@@ -9,6 +12,10 @@ pipeline {
             }
             steps {
                 sh 'python setup.py sdist bdist_wheel'
+
+                sh 'pip install twine'
+                sh 'twine upload -u $pypiCreds_USR -p $pypiCreds_PSW dist/*'
+
                 archiveArtifacts artifacts: 'dist/*.whl', fingerprint: true
             }
         }
@@ -20,6 +27,10 @@ pipeline {
             }
             steps {
                 sh 'python setup.py sdist bdist_wheel'
+
+                sh 'pip install twine'
+                sh 'twine upload -u $pypiCreds_USR -p $pypiCreds_PSW dist/*'
+
                 archiveArtifacts artifacts: 'dist/*.whl', fingerprint: true
             }
         }

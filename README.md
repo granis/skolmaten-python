@@ -11,6 +11,7 @@ FOR NON-SWEDISH PEPOLE: [skolmaten.se](https://skolmaten.se) has data for what i
 ## Usage
 
 ```python
+
 from skolmaten import skolmaten
 
 # You can find the id of your school by going to skolmaten.se, selecting your school, and looking in the address bar. 
@@ -21,6 +22,7 @@ weekly = schoolFood.getData()
 print(weekly)
 
 [{'date': datetime.datetime(2019, 10, 14, 0, 0), 'food': [u'Falukorv med potatismos', u'Potatisfrestelse med salladsost', u'ängsbiffar']}, ... {'date': datetime.datetime(2019, 10, 21, 0, 0), 'food': [u'Pastasås Arrabiata med linser och soltorkade tomater', u'Grönsakspaj']}]
+
 ```
 
 ## Todo
