@@ -7,14 +7,14 @@ This is a simple wrapper for the [skolmaten.se](https://skolmaten.se) service.
 I wrote this becuase I needed a way to get the data for what I am going to eat in school for some stuff. So, why not publish it and help somebody else.
 
 FOR NON-SWEDISH PEPOLE: [skolmaten.se](https://skolmaten.se) has data for what is going to be servered in schools all over Sweden.
-  
+
 ## Usage
 
 ```python
 
 from skolmaten import skolmaten
 
-# You can find the id of your school by going to skolmaten.se, selecting your school, and looking in the address bar. 
+# You can find the id of your school by going to skolmaten.se, selecting your school, and looking in the address bar.
 # For example this is what I see for polhemsskolan => https://skolmaten.se/polhemsskolan2/
 schoolFood = skolmaten("polhemsskolan2")
 
