@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "molskaten"
-version = "1.0.0"
+version = "0.0.0"
 description = "A (forked) python wrapper for the skolmaten service."
 authors = ["granis <granis@gmail.com>"]
 license = "MIT"
