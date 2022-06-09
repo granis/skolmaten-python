@@ -1,1 +1,3 @@
-from .molskaten import Molskaten  # noqa: F401
+from .molskaten import Lunch, Molskaten
+
+__all__ = ["Molskaten", "Lunch"]

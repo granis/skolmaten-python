@@ -1,28 +1,42 @@
-import json
 from datetime import datetime
+from typing import List
 
 import requests
 import xmltodict
 
 
-class Molskaten:
-    def __init__(self, school: str, baseUrl="https://skolmaten.se"):
-        self.endpoint = "{}/{}/rss".format(baseUrl, school)
-        self.school = school
+class Lunch:
+    def __init__(self, food: str, date: datetime):
+        self._food = food
+        self._date = date
 
-    def getData(self):
-        r = requests.get(self.endpoint)
+    def __repr__(self) -> str:
+        return f"Lunch: {self.date} @ {self._food}"
+
+    @property
+    def food(self) -> str:
+        return self._food
+
+    @property
+    def date(self) -> str:
+        return datetime.strftime(self._date, "%Y-%m-%d")
+
+
+class Molskaten:
+    def __init__(self, school: str, baseUrl: str = "https://skolmaten.se"):
+        self._endpoint = "{}/{}/rss".format(baseUrl, school)
+        self._school = school
+
+    def getData(self) -> List[Lunch]:
+        r = requests.get(self._endpoint)
         food = []
 
         if r.status_code == 200:
-            # First we need to parse the xml data from the request, then we convert it to json
-            data = json.dumps(xmltodict.parse(r.text))
+            # First we need to parse the xml data from the request
+            data = xmltodict.parse(r.text)
+            items = data["rss"]["channel"]["item"]
 
-            # Then we convert it to dict, we need to do this to avoid OrderedDict. :(
-            data = json.loads(data)["rss"]["channel"]
-
-            for i in data["item"]:
-
+            for i in items:
                 # This parses the date from the rss.
                 pubDate = i["pubDate"].split(" ")
 
@@ -33,7 +47,8 @@ class Molskaten:
                 date = datetime.strptime(fixedDate, "%d %b %Y")
 
                 # Then we append it to the food array.
-                food.append({"date": date, "food": i["description"].split("<br/>")})
+                # food.append({"date": date, "food": i["description"].split("<br/>")})
+                food.append(Lunch(i["description"].split("<br/>"), date))
 
             return food
         else:
