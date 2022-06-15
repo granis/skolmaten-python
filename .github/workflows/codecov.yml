@@ -17,6 +17,8 @@ jobs:
         pip install poetry
         poetry install --no-root
     - name: Run tests and collect coverage
-      run: poetry run python -m pytest --cov .
+      run: poetry run python -m pytest --cov . --cov-report xml:coverage.xml
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
+      with:
+        files: coverage.xml
