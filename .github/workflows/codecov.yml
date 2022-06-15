@@ -1,21 +1,26 @@
 name: Codecov-check
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+      - dev
+  pull_request:
 
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: Install poetry
+      run: pipx install poetry
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.7'
+        cache: 'poetry'
     - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install poetry
-        poetry install --no-root
+      run: poetry install --no-root
     - name: Run tests and collect coverage
       run: poetry run python -m pytest --cov . --cov-report xml:coverage.xml
     - name: Upload coverage to Codecov
