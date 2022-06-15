@@ -50,3 +50,9 @@ repos:
   hooks:
     - id: mypy
       additional_dependencies: [types-requests]
+
+- repo: https://github.com/jendrikseipp/vulture
+  rev: v2.4
+  hooks:
+    - id: vulture
+      require_serial: True

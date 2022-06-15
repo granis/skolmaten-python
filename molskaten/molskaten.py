@@ -25,7 +25,6 @@ class Lunch:
 class Molskaten:
     def __init__(self, school: str, baseUrl: str = "https://skolmaten.se"):
         self._endpoint = "{}/{}/rss".format(baseUrl, school)
-        self._school = school
 
     def getData(self) -> List[Lunch]:
         r = requests.get(self._endpoint)
