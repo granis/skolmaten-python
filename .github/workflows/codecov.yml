@@ -1,6 +1,11 @@
 name: Codecov-check
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+      - dev
+  pull_request:
 
 jobs:
   run:
