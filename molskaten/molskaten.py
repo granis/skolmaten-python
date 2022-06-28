@@ -28,27 +28,31 @@ class Molskaten:
 
     def getData(self) -> List[Lunch]:
         r = requests.get(self._endpoint)
-        food = []
+        food: List[Lunch] = []
 
-        if r.status_code == 200:
-            # First we need to parse the xml data from the request
-            data = xmltodict.parse(r.text)
-            items = data["rss"]["channel"]["item"]
-
-            for i in items:
-                # This parses the date from the rss.
-                pubDate = i["pubDate"].split(" ")
-
-                # This fixes the date parsed to "DAY MONTH YEAR".
-                fixedDate = "{} {} {}".format(pubDate[1], pubDate[2], pubDate[3])
-
-                # Then this makes it eaiser to use the date.
-                date = datetime.strptime(fixedDate, "%d %b %Y")
-
-                # Then we append it to the food array.
-                # food.append({"date": date, "food": i["description"].split("<br/>")})
-                food.append(Lunch(i["description"].split("<br/>"), date))
-
+        if not r.status_code == 200:
             return food
-        else:
-            return []
+
+        # First we need to parse the xml data from the request
+        data = xmltodict.parse(r.text)
+        try:
+            items = data["rss"]["channel"]["item"]
+        except KeyError:
+            # no food this week :(
+            return food
+
+        for i in items:
+            # This parses the date from the rss.
+            pubDate = i["pubDate"].split(" ")
+
+            # This fixes the date parsed to "DAY MONTH YEAR".
+            fixedDate = "{} {} {}".format(pubDate[1], pubDate[2], pubDate[3])
+
+            # Then this makes it eaiser to use the date.
+            date = datetime.strptime(fixedDate, "%d %b %Y")
+
+            # Then we append it to the food array.
+            # food.append({"date": date, "food": i["description"].split("<br/>")})
+            food.append(Lunch(i["description"].split("<br/>"), date))
+
+        return food
