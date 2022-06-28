@@ -1,11 +1,7 @@
+# mypy: allow-untyped-calls
 import subprocess  # nosec B404
-import sys
 
-if sys.version_info < (3, 8):
-    # compatibility for python <3.8
-    import importlib_metadata as metadata
-else:
-    from importlib import metadata  # noqa: F401, TC002
+import importlib_metadata as metadata
 
 
 def find_my_version() -> str:
