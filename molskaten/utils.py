@@ -1,7 +1,11 @@
 # mypy: allow-untyped-calls
 import subprocess  # nosec B404
+import sys
 
-import importlib_metadata as metadata
+if sys.version_info[:2] >= (3, 8):
+    import importlib.metadata as metadata
+else:
+    import importlib_metadata as metadata
 
 
 def find_my_version() -> str:
