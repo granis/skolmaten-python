@@ -1,0 +1,40 @@
+name: Tests
+
+on:
+  pull_request:
+    # paths-ignore:
+    #   - 'docs/**'
+  push:
+    branches:
+      - master
+    # paths-ignore:
+    #   - 'docs/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+          - '3.7'
+    name: Python ${{ matrix.python-version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Poetry
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pipx install poetry
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'poetry'
+      - name: Install dependencies
+        run: poetry install -q -n --no-root
+      - name: Run tests
+        run: pytest
