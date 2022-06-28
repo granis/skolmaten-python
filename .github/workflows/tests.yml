@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  windows:
+  ubuntu:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -36,5 +36,5 @@ jobs:
           cache: 'poetry'
       - name: Install dependencies
         run: poetry install -q -n --no-root
-      - name: Run tests
-        run: pytest
+      - name: Run pytest
+        run: python -m pytest
