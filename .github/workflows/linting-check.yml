@@ -30,7 +30,7 @@ jobs:
         uses: liskin/gh-problem-matcher-wrap@v1.0.1
         with:
           linters: flake8
-          run: flake8 --exclude dist
+          run: flake8 --exclude dist --max-line-length 120
 
   isort:
     runs-on: ubuntu-latest
