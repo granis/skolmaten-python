@@ -6,7 +6,7 @@ Molskaten is a fork of skolmaten-python, my main purpose is to play around with 
 
 This is a simple wrapper for the [skolmaten.se](https://skolmaten.se) service.
 
-I wrote this becuase I needed a way to get the data for what I am going to eat in school for some stuff. So, why not publish it and help somebody else.
+I wrote this because I needed a way to get the data for what I am going to eat in school for some stuff. So, why not publish it and help somebody else.
 
 FOR NON-SWEDISH PEOPLE: [skolmaten.se](https://skolmaten.se) has data for what is going to be served in schools all over Sweden.
 
